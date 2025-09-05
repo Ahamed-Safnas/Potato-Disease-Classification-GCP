@@ -15,8 +15,9 @@ RUN pip install -r requirements.txt
 COPY . .
 COPY ./models ./models
 
-# Expose port
-EXPOSE 8000
 
 # Command to run
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+# CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "${PORT}"]
+
+CMD exec uvicorn main:app --host 0.0.0.0 --port $PORT

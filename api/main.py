@@ -16,10 +16,19 @@ os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 
 
 #to connect frontend and backend
+#Since frontend and backend are different services (different domains), your backend must allow requests from your frontend’s domain
+
+# origins = [
+#     "http://localhost",
+#     "http://localhost:3000",
+# ]
+
+
 origins = [
-    "http://localhost",
-    "http://localhost:3000",
+    "https://potato-frontend-img-494507197669.us-central1.run.app",  # your frontend Cloud Run URL
+    "http://localhost:3000",  # local dev (optional)
 ]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -61,5 +70,5 @@ async def predict(
         'confidence': float(confidence)
     }
 
-if __name__ == "__main__":
-    uvicorn.run(app, host='localhost', port=8001) 
+# if __name__ == "__main__":
+#     uvicorn.run(app, host='localhost', port=8001) 

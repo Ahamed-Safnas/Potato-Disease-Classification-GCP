@@ -34,11 +34,19 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   clearButton: {
-    width: "-webkit-fill-available",
-    borderRadius: "15px",
-    padding: "15px 22px",
-    color: "#000000a6",
-    fontSize: "20px",
+    minWidth: '36px',
+    width: '36px',
+    height: '36px',
+    borderRadius: '50%',
+    padding: 0,
+    color: '#be6a77',
+    backgroundColor: '#fff',
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    zIndex: 2,
+    boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+    fontSize: '20px',
     fontWeight: 900,
   },
   root: {
@@ -62,7 +70,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
-    height: "93vh",
+    height: "89vh",
+    width: "99vw",
     marginTop: "8px",
   },
   imageCard: {
@@ -232,7 +241,21 @@ export const ImageUpload = () => {
           spacing={2}
         >
           <Grid item xs={12}>
-            <Card className={`${classes.imageCard} ${!image ? classes.imageCardEmpty : ''}`}>
+            <Card className={`${classes.imageCard} ${!image ? classes.imageCardEmpty : ''}`} style={{position: 'relative'}}>
+              {/* X button inside the card, top right */}
+              {data && (
+                <ColorButton
+                  variant="contained"
+                  className={classes.clearButton}
+                  color="primary"
+                  component="span"
+                  size="small"
+                  onClick={clearData}
+                  style={{position: 'absolute', top: 8, right: 8, zIndex: 2}}
+                >
+                  <Clear fontSize="small" />
+                </ColorButton>
+              )}
               {image && <CardActionArea>
                 <CardMedia
                   className={classes.media}
@@ -277,15 +300,23 @@ export const ImageUpload = () => {
               </CardContent>}
             </Card>
           </Grid>
-          {data &&
-            <Grid item className={classes.buttonGrid} >
-
-              <ColorButton variant="contained" className={classes.clearButton} color="primary" component="span" size="large" onClick={clearData} startIcon={<Clear fontSize="large" />}>
-                Clear
-              </ColorButton>
-            </Grid>}
         </Grid >
       </Container >
+
+      {/* Sticky Footer */}
+      <footer style={{
+        position: 'fixed',
+        left: 0,
+        bottom: 0,
+        width: '100%',
+        background: '#be6a77',
+        color: 'white',
+        textAlign: 'center',
+        padding: '10px 0',
+        zIndex: 1300
+      }}>
+        Project developed by <a href="https://www.ahamedsafnas.me" target="_blank" rel="noopener noreferrer" style={{ color: 'white', textDecoration: 'underline' }}>Ahamed Safnas</a>
+      </footer>
     </React.Fragment >
   );
 };
