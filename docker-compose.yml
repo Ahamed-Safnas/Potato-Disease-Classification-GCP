@@ -8,3 +8,7 @@ services:
     build: ./frontend
     ports:
       - "3000:80"
+
+#make changes in the 
+# backend port , i changed to 8080 
+# frontend ,will update 
